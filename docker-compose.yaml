@@ -1,0 +1,28 @@
+version: '3.7'
+services:
+  app-redis:
+    image: redislabs/redismod:latest
+    ports:
+      - "6379:6379"
+    networks:
+      - redis-bank-network
+    restart: always
+
+  app-redisbank:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    environment:
+      - REDIS_HOST=superbankdb-headless
+      - REDIS_PORT=128970
+      - REDIS_PASSWORD=super
+    ports:
+      - "8080:8080"
+    networks:
+      - redis-bank-network
+    restart: always
+    depends_on:
+      - app-redis
+networks:
+  redis-bank-network:
+    driver: bridge
