@@ -13,9 +13,9 @@ services:
       context: ./
       dockerfile: Dockerfile
     environment:
-      - REDIS_HOST=superbankdb-headless
-      - REDIS_PORT=128970
-      - REDIS_PASSWORD=super
+      - REDIS_HOST=bankdb-headless
+      - REDIS_PORT=128969
+      - REDIS_PASSWORD=redisbank
     ports:
       - "8080:8080"
     networks:
